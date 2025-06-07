@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Module Rename Script
-# Usage: ./rename_module.sh [old_path] [new_path]
+# Usage: ./module.sh [old_path] [new_path]
 
 set -euo pipefail
 
 # Default values
 OLD_PATH="${1:-template.go}"
-NEW_PATH="${2:-webservices/}"
+NEW_PATH="${2:-webservices}"
 
 echo "Renaming Go module from $OLD_PATH to $NEW_PATH"
 

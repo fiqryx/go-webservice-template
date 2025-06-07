@@ -109,10 +109,10 @@ Make sure the configuration `DBRegistry.factories` at [/registry/database.go](re
 This script helps rename the Go module path in [go.mod](go.mod) and across your project files.
 ```bash
 # using default values (e.g., template.go → webservices)
-./rename.sh
+./module.sh
 
 # using custom module paths
-./rename.sh "old/module/path" "new/module/path"
+./module.sh "old/module/path" "new/module/path"
 ```
 
 ### How to Build
