@@ -98,12 +98,10 @@ func NewServer(host, port string) *Server {
 	router := gin.Default()
 
 	router.Static("/public", "storage/public")
-	router.StaticFile("/favicon.ico", "public/logo.ico")
+	router.StaticFile("/favicon.ico", "public/favicon.ico")
 	router.Use(gzip.Gzip(gzip.DefaultCompression))
 	router.Use(middleware.Cors())
-
-	routes.Api(db, router.Group("/api"))
-	// other route here...
+	routes.App(db, router.Group("/"))
 
 	router.NoRoute(func(ctx *gin.Context) {
 		switch ctx.NegotiateFormat(gin.MIMEJSON, gin.MIMEHTML) {
