@@ -86,14 +86,14 @@ After created adjust registry at [/registry/controller.go](registry/controller.g
 #### Create factory
 command to create factory:
 ```bash
-go run . db:factory --name=user
+go run . make:factory --name=user
 ```
 
 with specific output directory, default directory is [/database/factory](database/factory/)
 ```bash
-go run . db:factory --name=user --output=./factory
+go run . make:factory --name=user --output=./factory
 # or
-go run . db:factory --n user -o ./factory
+go run . make:factory --n user -o ./factory
 ```
 
 #### Database seeding

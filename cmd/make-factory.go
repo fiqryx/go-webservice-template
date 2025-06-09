@@ -13,7 +13,7 @@ import (
 
 func NewMDBFactoryCmd() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "db:factory",
+		Use:   "make:factory",
 		Short: "Create database factory",
 		Run: func(cmd *cobra.Command, args []string) {
 			name, err := cmd.Flags().GetString("name")
