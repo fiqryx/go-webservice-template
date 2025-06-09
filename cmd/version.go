@@ -3,27 +3,25 @@ package cmd
 import (
 	"fmt"
 	"runtime"
+
+	c "template.go/packages/common"
 )
 
-var (
-	version = "1.0.0"
-	build   = "2025-06-06T00:00:00Z"
-)
+var Version = c.Env("VERSION", "1.0.0")
 
-type Version struct {
+type VersionInfo struct {
 	Show     bool   `json:"-" yaml:"-"`
-	Version  string `json:"version" yaml:"version"`
-	Build    string `json:"build" yaml:"build"`
-	Go       string `json:"go" yaml:"go"`
-	Compiler string `json:"compiler" yaml:"compiler"`
-	Platform string `json:"platform" yaml:"platform"`
+	Version  string `json:"version"`
+	Build    string `json:"build"`
+	Go       string `json:"go"`
+	Compiler string `json:"compiler"`
+	Platform string `json:"platform"`
 }
 
-func GetVersion() *Version {
-	return &Version{
+func GetVersion() *VersionInfo {
+	return &VersionInfo{
 		Show:     true,
-		Version:  version,
-		Build:    build,
+		Version:  Version,
 		Go:       runtime.Version(),
 		Compiler: runtime.Compiler,
 		Platform: fmt.Sprintf("%s/%s", runtime.GOOS, runtime.GOARCH),

@@ -118,10 +118,6 @@ This script helps rename the Go module path in [go.mod](go.mod) and across your 
 ### How to Build
 ```bash
 $ go build -o ./bin/api
-# or
-$ go build -ldflags "-X main.version=1.0.0-dev" -o ./bin/api
-# with vendor
+# or with vendor
 $ go build -mod=vendor -o ./bin/api
-# flags and vendor
-$ go build -mod=vendor -ldflags "-X main.version=1.0.0-dev" -o ./bin/api
 ```
