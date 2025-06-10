@@ -27,7 +27,10 @@ var DBRegistry = &DatabaseRegistry{
 		// database extensions
 	},
 	factories: []func(*gorm.DB) error{
-		// register factory for seeding
+		// register factory for seeding, example:
+		// func(db *gorm.DB) error {
+		// 	return factory.NewUserFactory(db).CreateBatch(1)
+		// },
 	},
 }
 
