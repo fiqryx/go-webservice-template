@@ -19,7 +19,7 @@ func NewMakeController() *cobra.Command {
 				return
 			}
 
-			filename := fmt.Sprintf("%s.repository.go", name)
+			filename := fmt.Sprintf("%s.controller.go", name)
 			outputDir, err := cmd.Flags().GetString("output")
 			if err != nil {
 				slog.Error("Getting output directory: %v", slog.Any("error", err))
