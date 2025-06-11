@@ -6,6 +6,8 @@ import (
 	"path/filepath"
 
 	"github.com/spf13/cobra"
+	c "template.go/packages/common"
+	"template.go/packages/file"
 )
 
 func NewMakeServices() *cobra.Command {
@@ -26,7 +28,11 @@ func NewMakeServices() *cobra.Command {
 				return
 			}
 
-			writeSource(name, filepath.Join(outputDir, filename), serviceCode)
+			data := map[string]any{
+				"Name": c.ToUpper(c.ToCamelCase(name)),
+			}
+
+			file.Create(filepath.Join(outputDir, filename), serviceCode, &data)
 		},
 	}
 

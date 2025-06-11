@@ -17,6 +17,8 @@ cd go-webservice-template
 Copy the example .env file and configure it as needed:
 ```bash
 cp .env.example .env
+# then generate secret key
+go run . generate:key
 ```
 
 #### 3. Run the Application
@@ -49,7 +51,7 @@ go run . migrate
 # or
 go run . migrate -D
 ```
-Make sure to register your models in the `DBRegistry.models` at [/registry/database.go](registry/database.go).
+Make sure to register your models in the `Database.models` at [/registry/database.go](registry/database.go).
 
 ### Database backup
 command to backup database with registry tables:
@@ -58,12 +60,18 @@ go run . db:backup
 # or
 go run . db:backup --output=./storage/backup/20250518
 ```
-Make sure to register your tables `DBRegistry.tables` at [/registry/database.go](registry/database.go).
+Make sure to register your tables `Database.tables` at [/registry/database.go](registry/database.go).
 
 ---
 
 ### Additional CLI Commands
 This project also supports other command-line operations:
+
+#### Create model:
+```bash
+go run . make:model --name=user
+```
+Make sure to register your tables `Database.models` at [/registry/database.go](registry/database.go).
 
 #### Create repository:
 ```bash
@@ -101,7 +109,7 @@ command to run database seed with the `factories`:
 ```bash
 go run . db:seed
 ```
-Make sure the configuration `DBRegistry.factories` at [/registry/database.go](registry/database.go).
+Make sure the configuration `Database.factories` at [/registry/database.go](registry/database.go).
 
 ---
 

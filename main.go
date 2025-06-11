@@ -49,9 +49,11 @@ func NewCmd() *cobra.Command {
 	root.AddCommand(cmd.NewDBBackupCmd())
 	root.AddCommand(cmd.NewDBSeedCmd())
 	root.AddCommand(cmd.NewMDBFactoryCmd())
+	root.AddCommand(cmd.NewMakeModel())
 	root.AddCommand(cmd.NewMakeRepo())
 	root.AddCommand(cmd.NewMakeServices())
 	root.AddCommand(cmd.NewMakeController())
+	root.AddCommand(cmd.NewGenerateKeyCmd())
 
 	return root
 }

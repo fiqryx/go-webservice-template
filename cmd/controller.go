@@ -5,6 +5,9 @@ import (
 	"log/slog"
 	"path/filepath"
 
+	c "template.go/packages/common"
+	"template.go/packages/file"
+
 	"github.com/spf13/cobra"
 )
 
@@ -26,7 +29,11 @@ func NewMakeController() *cobra.Command {
 				return
 			}
 
-			writeSource(name, filepath.Join(outputDir, filename), controllerCode)
+			data := map[string]any{
+				"Name": c.ToUpper(c.ToCamelCase(name)),
+			}
+
+			file.Create(filepath.Join(outputDir, filename), controllerCode, &data)
 		},
 	}
 

@@ -5,10 +5,11 @@ import (
 	"log/slog"
 	"os"
 	"path/filepath"
-	"strings"
 	"time"
 
 	"github.com/spf13/cobra"
+	c "template.go/packages/common"
+	"template.go/packages/file"
 )
 
 func NewMDBFactoryCmd() *cobra.Command {
@@ -35,7 +36,12 @@ func NewMDBFactoryCmd() *cobra.Command {
 
 			timestamp := time.Now().Format("20060102150405")
 			filename := fmt.Sprintf("%s_%s_factory.go", timestamp, name)
-			writeSource(name, filepath.Join(outputDir, filename), factoryCode)
+
+			data := map[string]any{
+				"Name": c.ToUpper(c.ToCamelCase(name)),
+			}
+
+			file.Create(filepath.Join(outputDir, filename), factoryCode, &data)
 		},
 	}
 
@@ -43,13 +49,6 @@ func NewMDBFactoryCmd() *cobra.Command {
 	cmd.Flags().StringP("output", "o", "./database/factory", "Output directory for factory files")
 
 	return cmd
-}
-
-func toUpper(s string) string {
-	if s == "" {
-		return s
-	}
-	return strings.ToUpper(s[:1]) + s[1:]
 }
 
 const factoryCode = `package factory

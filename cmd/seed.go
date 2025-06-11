@@ -19,7 +19,7 @@ func NewDBSeedCmd() *cobra.Command {
 				return
 			}
 
-			for _, f := range registry.DBRegistry.GetFactories() {
+			for _, f := range registry.Database.GetFactories() {
 				if err := f(db); err != nil {
 					slog.Error("Error factory", slog.Any("error", err))
 					continue

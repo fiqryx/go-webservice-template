@@ -13,7 +13,7 @@ import (
 	"template.go/packages/common"
 )
 
-var DBRegistry = &DatabaseRegistry{
+var Database = &DatabaseRegistry{
 	enums: []Enum{
 		// enums type
 	},

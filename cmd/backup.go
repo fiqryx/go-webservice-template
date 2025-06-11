@@ -27,7 +27,7 @@ func NewDBBackupCmd() *cobra.Command {
 				return
 			}
 
-			if err := registry.DBRegistry.Backup(db, output); err != nil {
+			if err := registry.Database.Backup(db, output); err != nil {
 				slog.Error("Backup failed", slog.Any("error", err))
 			}
 		},

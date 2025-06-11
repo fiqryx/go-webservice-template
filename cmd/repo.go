@@ -2,13 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"html/template"
 	"log/slog"
-	"os"
 	"path/filepath"
 
 	"github.com/spf13/cobra"
 	c "template.go/packages/common"
+	"template.go/packages/file"
 )
 
 func NewMakeRepo() *cobra.Command {
@@ -29,7 +28,11 @@ func NewMakeRepo() *cobra.Command {
 				return
 			}
 
-			writeSource(name, filepath.Join(outputDir, filename), repoCode)
+			data := map[string]any{
+				"Name": c.ToUpper(c.ToCamelCase(name)),
+			}
+
+			file.Create(filepath.Join(outputDir, filename), repoCode, &data)
 		},
 	}
 
@@ -37,32 +40,6 @@ func NewMakeRepo() *cobra.Command {
 	cmd.Flags().StringP("output", "o", "./src/repositories", "Output directory for repositories")
 
 	return cmd
-}
-
-func writeSource(name, filePath, source string) {
-	file, err := os.Create(filePath)
-	if err != nil {
-		slog.Error("create file", slog.Any("error", err))
-		return
-	}
-	defer file.Close()
-
-	tmpl, err := template.New("source").Parse(source)
-	if err != nil {
-		fmt.Printf("error parse code: %v\n", err)
-		return
-	}
-
-	data := map[string]any{
-		"Name": toUpper(c.ToCamelCase(name)),
-	}
-
-	if err := tmpl.Execute(file, data); err != nil {
-		fmt.Printf("Error write code: %v\n", err)
-		return
-	}
-
-	fmt.Printf("created: %s\n", filePath)
 }
 
 const repoCode = `package repositories

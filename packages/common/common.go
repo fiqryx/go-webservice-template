@@ -118,6 +118,13 @@ func Contains(s string, substrs []string) bool {
 	return false
 }
 
+func ToUpper(s string) string {
+	if s == "" {
+		return s
+	}
+	return strings.ToUpper(s[:1]) + s[1:]
+}
+
 func ToCamelCase(s string) string {
 	s = strings.TrimSpace(s)
 	if s == "" {

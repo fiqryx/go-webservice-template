@@ -22,7 +22,7 @@ func NewMigrateCmd() *cobra.Command {
 			}
 
 			fresh, _ := cmd.Flags().GetBool("fresh")
-			if err := registry.DBRegistry.Migrate(db, fresh); err != nil {
+			if err := registry.Database.Migrate(db, fresh); err != nil {
 				slog.Error("Migration failed", slog.Any("error", err))
 			}
 		},
