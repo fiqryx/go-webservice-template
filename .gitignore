@@ -23,6 +23,7 @@ venv/
 logs/
 bin/
 test/
+tmp/
 
 # Go workspace file
 go.work
