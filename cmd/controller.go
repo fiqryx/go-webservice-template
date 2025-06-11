@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"path/filepath"
 
-	c "template.go/packages/common"
-	"template.go/packages/file"
+	c "webservices/packages/common"
+	"webservices/packages/file"
 
 	"github.com/spf13/cobra"
 )

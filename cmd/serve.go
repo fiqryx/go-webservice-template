@@ -16,10 +16,10 @@ import (
 	"github.com/gin-contrib/gzip"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
-	"template.go/database"
-	c "template.go/packages/common"
-	"template.go/src/middleware"
-	"template.go/src/routes"
+	"webservices/database"
+	c "webservices/packages/common"
+	"webservices/src/middleware"
+	"webservices/src/routes"
 )
 
 func NewServeCmd() *cobra.Command {

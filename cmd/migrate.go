@@ -5,8 +5,8 @@ import (
 
 	"github.com/spf13/cobra"
 	"gorm.io/gorm"
-	"template.go/database"
-	"template.go/registry"
+	"webservices/database"
+	"webservices/registry"
 )
 
 func NewMigrateCmd() *cobra.Command {

@@ -1,4 +1,4 @@
-module template.go
+module webservices
 
 go 1.24.2
 

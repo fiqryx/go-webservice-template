@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"gorm.io/gorm"
-	"template.go/packages/common"
+	"webservices/packages/common"
 )
 
 var Database = &DatabaseRegistry{

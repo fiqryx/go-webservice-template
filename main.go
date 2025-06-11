@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
-	"template.go/cmd"
-	c "template.go/packages/common"
+	"webservices/cmd"
+	c "webservices/packages/common"
 )
 
 var description = `Command Line Interface

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/spf13/cobra"
-	"template.go/registry"
+	"webservices/registry"
 )
 
 func NewDBBackupCmd() *cobra.Command {

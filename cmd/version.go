@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
-	c "template.go/packages/common"
+	c "webservices/packages/common"
 )
 
 var Version = c.Env("VERSION", "1.0.0")

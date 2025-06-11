@@ -4,7 +4,7 @@ import (
 	"log/slog"
 
 	"github.com/spf13/cobra"
-	"template.go/registry"
+	"webservices/registry"
 )
 
 func NewDBSeedCmd() *cobra.Command {
