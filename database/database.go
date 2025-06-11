@@ -17,10 +17,6 @@ var (
 	once sync.Once
 )
 
-func DB() *gorm.DB {
-	return db
-}
-
 func Connect(dsn string, debug bool) {
 	once.Do(func() {
 		var loggerConfig logger.Interface
@@ -32,7 +28,8 @@ func Connect(dsn string, debug bool) {
 			loggerConfig = logger.Default.LogMode(logger.Silent)
 		}
 
-		db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		var err error
+		db, err = gorm.Open(postgres.Open(dsn), &gorm.Config{
 			TranslateError: true,
 			Logger:         loggerConfig,
 			NamingStrategy: schema.NamingStrategy{
@@ -56,6 +53,10 @@ func Connect(dsn string, debug bool) {
 
 		slog.Info("Database connected")
 	})
+}
+
+func DB() *gorm.DB {
+	return db
 }
 
 func Disconnect() error {
