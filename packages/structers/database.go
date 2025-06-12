@@ -70,11 +70,13 @@ func (r *DatabaseRegistry) Migrate(db *gorm.DB, fresh bool) error {
 
 	if !fresh {
 		for _, enum := range r.Enums {
-			ensureEnumValues(tx, enum.Name, enum.Values)
+			if err := tx.Exec(enum.UpdateQuery()).Error; err != nil {
+				slog.Error("Add enum value", slog.Any("error", err))
+			}
 		}
 	}
 
-	if err := autoMigrateModels(tx, r.Models); err != nil {
+	if err := tx.AutoMigrate(r.Models...); err != nil {
 		tx.Rollback()
 		return err
 	}
@@ -83,7 +85,7 @@ func (r *DatabaseRegistry) Migrate(db *gorm.DB, fresh bool) error {
 		return err
 	}
 
-	slog.Info("✅ Database migration completed successfully")
+	slog.Info("✅ Database migration successfully")
 	return nil
 }
 
@@ -189,33 +191,4 @@ func dropEnums(tx *gorm.DB, names []string) error {
 		}
 	}
 	return nil
-}
-
-func autoMigrateModels(tx *gorm.DB, models []any) error {
-	return tx.AutoMigrate(models...)
-}
-
-func ensureEnumValues(db *gorm.DB, enumName string, values []string) {
-	for _, v := range values {
-		safeVal := strings.ReplaceAll(v, `'`, ``)
-
-		var exists bool
-		checkSQL := `
-			SELECT EXISTS (
-				SELECT 1 FROM pg_enum 
-				WHERE enumlabel = ? 
-				AND enumtypid = ?::regtype
-			);`
-		if err := db.Raw(checkSQL, safeVal, enumName).Scan(&exists).Error; err != nil {
-			slog.Error("Error checking value", slog.Any(enumName, err))
-			continue
-		}
-
-		if !exists {
-			stmt := fmt.Sprintf("ALTER TYPE %s ADD VALUE %s;", enumName, safeVal)
-			if err := db.Exec(stmt).Error; err != nil {
-				slog.Error("Add enum value", slog.Any(enumName, err))
-			}
-		}
-	}
 }
